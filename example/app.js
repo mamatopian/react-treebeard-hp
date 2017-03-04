@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { StyleRoot } from 'radium';
 import {Treebeard, decorators} from '../src/index';
 
-import data from './data';
+import dataFactory from './data-factory';
 import styles from './styles';
 import * as filters from './filter';
 
@@ -50,8 +50,10 @@ NodeViewer.propTypes = {
 class DemoTree extends React.Component {
     constructor(props){
         super(props);
-        this.state = {data};
+        // this.state = {data};
         this.onToggle = this.onToggle.bind(this);
+
+        this.init();
     }
     onToggle(node, toggled){
         if(this.state.cursor){this.state.cursor.active = false;}
@@ -61,12 +63,19 @@ class DemoTree extends React.Component {
     }
     onFilterMouseUp(e){
         const filter = e.target.value.trim();
-        if(!filter){ return this.setState({data}); }
-        var filtered = filters.filterTree(data, filter);
+        if(!filter){ return this.setState(this.state); }
+        var filtered = filters.filterTree(this.state, filter);
         filtered = filters.expandFilteredNodes(filtered, filter);
         this.setState({data: filtered});
     }
+    init() {
+        console.error('Start generate data...');
+        let nodes = dataFactory.buildChildren(1000, 'New Folder');
+        let data = dataFactory.buildNode('root-node', nodes);
+        this.state = {data};
+    }
     render(){
+        console.error('Start render...');
         return (
             <StyleRoot>
                 <div style={styles.searchBox}>
@@ -88,11 +97,10 @@ class DemoTree extends React.Component {
                         decorators={decorators}
                     />
                 </div>
-                <div style={styles.component}>
+                {/* <div style={styles.component}>
                     <NodeViewer node={this.state.cursor}/>
-                </div>
+                </div> */}
             </StyleRoot>
-
         );
     }
 }
