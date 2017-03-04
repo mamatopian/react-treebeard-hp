@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import {VelocityTransitionGroup} from 'velocity-react';
 
 import NodeHeader from './header';
 
@@ -42,15 +41,7 @@ class TreeNode extends React.Component {
     }
     renderDrawer(decorators, animations){
         const toggled = this.props.node.toggled;
-        if(!animations && !toggled){ return null; }
-        if(!animations && toggled){
-            return this.renderChildren(decorators, animations);
-        }
-        return (
-            <VelocityTransitionGroup {...animations.drawer} ref="velocity">
-                {toggled ? this.renderChildren(decorators, animations) : null}
-            </VelocityTransitionGroup>
-        );
+        return toggled ? this.renderChildren(decorators, animations) : null;
     }
     renderHeader(decorators, animations){
         return (
