@@ -70,7 +70,16 @@ class DemoTree extends React.Component {
     }
     init() {
         console.error('Start generate data...');
-        let nodes = dataFactory.buildChildren(1000, 'New Folder');
+        let nodes = dataFactory.buildChildren(10, 'New Folder');
+        nodes.map(node => {
+            node.children = dataFactory.buildChildren(10, 'New Folder');
+            node.children.map(subnode => {
+                subnode.children = dataFactory.buildChildren(10, 'New Folder');
+                subnode.children.map(leafnode => {
+                    leafnode.children = dataFactory.buildChildren(10, 'New Folder');
+                });
+            });
+        });
         let data = dataFactory.buildNode('root-node', nodes);
         // data = dataFactory.getDefaultData();
         this.state = {data};

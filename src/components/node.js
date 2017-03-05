@@ -43,6 +43,7 @@ class TreeNode extends React.Component {
                     nodes={this.props.node.children}
                     style={this.props.style}
                     decorators={this.props.decorators}
+                    onToggle={this.props.onToggle}
                 />
             );
         }

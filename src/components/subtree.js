@@ -4,10 +4,6 @@ import React, { Component, PropTypes } from 'react';
 import TreeNode from './node';
 
 class Subtree extends Component {
-    shouldComponentUpdate() {
-        console.error('shouldComponentUpdate', false);
-        return false;
-    }
     render(){
         let children = this.props.nodes;
         if (!Array.isArray(children)) { children = children ? [children] : []; }
