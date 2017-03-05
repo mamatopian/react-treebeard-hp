@@ -2,7 +2,6 @@
 
 import React from 'react';
 import shallowEqual from 'shallowequal';
-import deepEqual from 'deep-equal';
 
 class NodeHeader extends React.Component {
     constructor(props){
@@ -17,7 +16,7 @@ class NodeHeader extends React.Component {
             const isEqual = shallowEqual(props[key], nextProps[key]);
             if(!isEqual){ return true; }
         }
-        return !deepEqual(props.animations, nextProps.animations, { strict: true });
+        return false;
     }
     render(){
         const {style, decorators} = this.props;

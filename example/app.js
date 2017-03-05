@@ -69,22 +69,22 @@ class DemoTree extends React.Component {
         this.setState({data: filtered});
     }
     init() {
-        console.log('Start generate data...');
+        console.log('Generating tree nodes...');
         let count = 10;
         let nodes = dataFactory.buildChildren(10, 'New Folder');
         nodes.map(node => {
             count += 100;
-            node.children = dataFactory.buildChildren(100, 'New Folder');
+            node.children = dataFactory.buildChildren(10, 'New Folder');
             node.children.map(subnode => {
                 count += 100;
-                subnode.children = dataFactory.buildChildren(100, 'New Folder');
+                subnode.children = dataFactory.buildChildren(10, 'New Folder');
                 subnode.children.map(leafnode => {
                     count += 100;
-                    leafnode.children = dataFactory.buildChildren(100, 'New Folder');
+                    leafnode.children = dataFactory.buildChildren(10, 'New Folder');
                 });
             });
         });
-        console.log('count', count);
+        console.log('Tree node count: ', count);
         let data = dataFactory.buildNode('root-node', nodes);
         // data = dataFactory.getDefaultData();
         this.state = {data};
