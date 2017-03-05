@@ -6,6 +6,7 @@ import TreeNode from './node';
 class Subtree extends Component {
     render(){
         let children = this.props.nodes;
+        if (!this.props.toggled) { return null; }
         if (!Array.isArray(children)) { children = children ? [children] : []; }
         return (
             <ul style={this.props.style.subtree} ref="subtree">

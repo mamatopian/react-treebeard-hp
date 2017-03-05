@@ -69,23 +69,28 @@ class DemoTree extends React.Component {
         this.setState({data: filtered});
     }
     init() {
-        console.error('Start generate data...');
+        console.log('Start generate data...');
+        let count = 10;
         let nodes = dataFactory.buildChildren(10, 'New Folder');
         nodes.map(node => {
-            node.children = dataFactory.buildChildren(10, 'New Folder');
+            count += 100;
+            node.children = dataFactory.buildChildren(100, 'New Folder');
             node.children.map(subnode => {
-                subnode.children = dataFactory.buildChildren(10, 'New Folder');
+                count += 100;
+                subnode.children = dataFactory.buildChildren(100, 'New Folder');
                 subnode.children.map(leafnode => {
-                    leafnode.children = dataFactory.buildChildren(10, 'New Folder');
+                    count += 100;
+                    leafnode.children = dataFactory.buildChildren(100, 'New Folder');
                 });
             });
         });
+        console.log('count', count);
         let data = dataFactory.buildNode('root-node', nodes);
         // data = dataFactory.getDefaultData();
         this.state = {data};
     }
     render(){
-        console.error('Start render...');
+        console.log('Start render...');
         return (
             <StyleRoot>
                 <div style={styles.searchBox}>

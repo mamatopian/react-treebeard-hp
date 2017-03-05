@@ -37,15 +37,18 @@ class TreeNode extends React.Component {
         let children;
         if(this.props.node.loading) {
             children = this.renderLoading(decorators);
-        } else {
+        } else if(this.props.node.children) {
             children = (
                 <Subtree
                     nodes={this.props.node.children}
                     style={this.props.style}
                     decorators={this.props.decorators}
                     onToggle={this.props.onToggle}
+                    toggled={this.props.node.toggled}
                 />
             );
+        } else {
+            children = null;
         }
 
         return (
